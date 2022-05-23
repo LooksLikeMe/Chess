@@ -29,9 +29,7 @@ export class Figure {
     this.id = uuidv4()
   }
   canMove(target: Cell): boolean {
-      return true
+    return true
   }
-  moveFigure(target: Cell) {
-       
-  }
+  moveFigure(target: Cell) {}
 }

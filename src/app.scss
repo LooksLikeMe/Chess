@@ -22,10 +22,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  img {
+    width:56px;
+    height:56px;
+    position: relative;
+  }
 }
 .black {
-  background-color: lightcoral;
+  background-color: lightgray;
 }
 .white {
-  background-color:linen;
+  background-color:steelblue;
 }

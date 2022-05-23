@@ -1,4 +1,4 @@
-import './app.css'
+import './app.scss'
 
 import { useEffect, useState } from 'react'
 import BoardComponent from './componenst/BoardComponent'
@@ -15,6 +15,7 @@ function App() {
     const newBoard = new Board()
 
     newBoard.initCells()
+    newBoard.addFigures()
     setBoard(newBoard)
   }
   return (
