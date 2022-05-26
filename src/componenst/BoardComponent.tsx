@@ -1,4 +1,5 @@
-import { FC } from 'react'
+import { Cell } from 'models/Cell'
+import { FC, useEffect, useState } from 'react'
 
 import { Board } from '../models/Board'
 
@@ -10,12 +11,41 @@ interface BoardProps {
 }
 
 const BoardComponent: FC<BoardProps> = ({ board, setBoard }) => {
+  const [selectedCell, setSelectedCell] = useState<Cell | null>(null)
+
+  const updeteBoard = () => {
+    const newBoard = board.getCopyBoard()
+    setBoard(newBoard)
+  }
+
+  const highlightCells = () => {
+    board.highlightCells(selectedCell)
+    updeteBoard()
+  }
+
+  const handleClick = (cell: Cell) => {
+    cell.figure && setSelectedCell(cell)
+  }
+
+  useEffect(() => {
+    highlightCells()
+  },[])
+  {console.log(board)}
   return (
     <div className="board">
+     
+      
       {board.cells.map((row, index) => (
         <div key={index}>
           {row.map(cell => (
-            <CellComponent cell={cell} key={cell.id} />
+            <CellComponent
+              cell={cell}
+              handleClick={handleClick}
+              key={cell.id}
+              selected={
+                cell.x === selectedCell?.x && cell.y === selectedCell?.y
+              }
+            />
           ))}
         </div>
       ))}
