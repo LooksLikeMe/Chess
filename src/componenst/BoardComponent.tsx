@@ -13,9 +13,18 @@ interface BoardProps {
 const BoardComponent: FC<BoardProps> = ({ board, setBoard }) => {
   const [selectedCell, setSelectedCell] = useState<Cell | null>(null)
 
-  const updeteBoard = () => {
-    const newBoard = board.getCopyBoard()
-    setBoard(newBoard)
+  const handleClick = (cell: Cell) => {
+    if (
+      selectedCell &&
+      selectedCell !== cell &&
+      selectedCell.figure?.canMove(cell)
+    ) {
+      selectedCell.moveFigure(cell)
+      setSelectedCell(null)
+    } else {
+      setSelectedCell(cell)
+    }
+    cell.figure && setSelectedCell(cell)
   }
 
   const highlightCells = () => {
@@ -23,18 +32,17 @@ const BoardComponent: FC<BoardProps> = ({ board, setBoard }) => {
     updeteBoard()
   }
 
-  const handleClick = (cell: Cell) => {
-    cell.figure && setSelectedCell(cell)
+  const updeteBoard = () => {
+    const newBoard = board.getCopyBoard()
+    setBoard(newBoard)
   }
 
   useEffect(() => {
     highlightCells()
-  },[])
-  {console.log(board)}
+  }, [selectedCell])
+
   return (
     <div className="board">
-     
-      
       {board.cells.map((row, index) => (
         <div key={index}>
           {row.map(cell => (

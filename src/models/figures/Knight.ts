@@ -10,4 +10,10 @@ export class Knight extends Figure {
     this.view = color === Colors.BLACK ? blackView : whiteView
     this.name = FigureNames.KNIGHT
   }
+  canMove(target: Cell): boolean {
+    if (!super.canMove(target)) {
+      return false
+    }
+    return true
+  }
 }

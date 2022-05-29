@@ -11,4 +11,10 @@ export class Bishop extends Figure {
     this.view = color === Colors.BLACK ? blackView : whiteView
     this.name = FigureNames.BISHOP
   }
+  canMove(target: Cell): boolean {
+    if (!super.canMove(target)) {
+      return false
+    }
+    return true
+  }
 }
